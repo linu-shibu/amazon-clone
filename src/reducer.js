@@ -25,6 +25,11 @@ const reducer = (state, action) => {
         console.warn(`Cannot remove product (id:${action.id}`);
       }
       return { ...state, basket: newBasket };
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
       return state;
   }
