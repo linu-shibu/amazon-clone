@@ -40,8 +40,8 @@ function App() {
             <Checkout />
           </Route>
           <Route path="/payment">
-            <Payment />
             <Header />
+            <Payment />
           </Route>
           <Route path="/">
             <Header />
