@@ -6,10 +6,11 @@ import { Link, useHistory } from "react-router-dom";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import CurrencyFormat from "react-currency-format";
 import { getBasketTotal } from "./reducer";
-import axios from "axios";
+import axios from "./axios";
+import { db } from "./firebase";
 
 function Payment() {
-  const [{ basket, user }, dispath] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
   const history = useHistory();
 
   const [succeeded, setSucceeded] = useState(false);
@@ -34,6 +35,9 @@ function Payment() {
     getClientSecret();
   }, [basket]);
 
+  console.log("The secret is : ", clientSecret);
+  console.log("User is: ", user);
+
   const handleSubmit = async (event) => {
     // Stripe stuff
     event.preventDefault();
@@ -45,11 +49,27 @@ function Payment() {
       })
       .then(({ paymentIntent }) => {
         // Confirmation
+        console.log("Payment ingtent is: ", paymentIntent);
+
+        db.collection("users")
+          .doc(user?.uid)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
 
-        history.pushState("/orders");
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
+
+        history.replace("/orders");
       });
   };
 
@@ -115,6 +135,7 @@ function Payment() {
                   <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                 </button>
               </div>
+              {error && <div>{error}</div>}
             </form>
           </div>
         </div>
