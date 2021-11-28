@@ -2,6 +2,8 @@ import React from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import PlaceIcon from "@mui/icons-material/Place";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
@@ -24,9 +26,24 @@ function Header() {
         />
       </Link>
 
+      <div className="header__option">
+        <PlaceIcon className="header__addressIcon" />
+        <span className="header__optionLine1">Hello</span>
+        <span className="header__optionLine2">Select your address</span>
+      </div>
+
       <div className="header__search">
         <input type="text" className="header__searchInput" />
         <SearchIcon className="header__searchIcon" />
+      </div>
+
+      <div className="header__flagIcon">
+        <img
+          src="https://media.istockphoto.com/vectors/flag-of-india-vector-id519611160?k=20&m=519611160&s=612x612&w=0&h=n8mmywhzMzcrRI4I50uKYEFVeS4wDfpOGQGEaCK6YPw="
+          alt="img"
+          className="header__flagImg"
+        />
+        <ArrowDropDownIcon className="header__dropIcon" />
       </div>
 
       <div className="header__nav">

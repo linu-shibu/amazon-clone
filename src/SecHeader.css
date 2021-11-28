@@ -1,0 +1,46 @@
+.secHeader {
+  background-color: #1b2b3f;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 4px;
+}
+
+.secHeader__menuIcon {
+  color: white;
+}
+
+.secHeader__option {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  padding: 8px;
+}
+
+.secHeader__sideImg {
+  position: relative;
+  left: 50px;
+}
+/* .secHeader__sideImg {
+  float: right;
+} */
+
+.optionAll {
+  display: flex;
+  align-items: center;
+  /* border: solid white 2px; */
+}
+
+.option__Prime {
+  display: flex;
+  align-items: center;
+}
+
+.secHeader__dropIcon {
+  color: white;
+}
+
+.secHeader div:hover {
+  border: solid white 2px;
+  border-radius: 2px;
+}
